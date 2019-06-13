@@ -25,15 +25,4 @@ export default function bootstrap() {
       context: 'exportable'
     }
   })
-
-  store.dispatch({
-    type: APPEND_FOOTERBAR,
-    footer: {
-      position: TOOL_POSITION.REAR_END,
-      template: html`
-        <mwc-button @click="${toggleOverlayTemplate}">import</mwc-button>
-      `,
-      context: 'importable'
-    }
-  })
 }
