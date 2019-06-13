@@ -1,13 +1,14 @@
+import '@material/mwc-icon/mwc-icon'
+import { EXPORT } from '@things-factory/export-base'
+import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
 import { store } from '@things-factory/shell'
 import { css, html, LitElement } from 'lit-element'
 import { connect } from 'pwa-helpers'
-import { EXPORT } from '@things-factory/export-base'
-import '@material/mwc-icon/mwc-icon'
 
 class ExportContextUI extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _extensions: Object
+      _extensions: Array
     }
   }
 
@@ -51,11 +52,12 @@ class ExportContextUI extends connect(store)(LitElement) {
   }
 
   render() {
-    let extensions = []
-    for (let key in this._extensions) {
-      extensions.push(key)
-    }
+    const extensions = []
 
+    for (let extension in this._extensions) {
+      extensions.push(extension)
+    }
+    this.extension = this.extension || extensions.length > 0 ? extensions[0] : null
     return html`
       <ul>
         ${extensions.map(
@@ -108,7 +110,15 @@ class ExportContextUI extends connect(store)(LitElement) {
   _dispatchAction(params) {
     store.dispatch({
       type: EXPORT,
-      params
+      export: {
+        extension: this.extension,
+        params
+      }
+    })
+
+    store.dispatch({
+      type: TOGGLE_OVERLAY,
+      overlay: { show: false }
     })
   }
 
