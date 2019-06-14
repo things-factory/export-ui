@@ -20,7 +20,7 @@ export default function bootstrap() {
     footer: {
       position: TOOL_POSITION.REAR_END,
       template: html`
-        <mwc-button @click="${toggleOverlayTemplate}">export</mwc-button>
+        <mwc-button style="margin: auto 0;" @click="${toggleOverlayTemplate}">export</mwc-button>
       `,
       context: 'exportable'
     }
