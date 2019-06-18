@@ -1,13 +1,16 @@
+import { css, html, LitElement } from 'lit-element'
+import { connect } from 'pwa-helpers'
+
 import '@material/mwc-icon/mwc-icon'
+
 import { EXPORT } from '@things-factory/export-base'
 import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
 import { store } from '@things-factory/shell'
-import { css, html, LitElement } from 'lit-element'
-import { connect } from 'pwa-helpers'
 
 class ExportContextUI extends connect(store)(LitElement) {
   static get properties() {
     return {
+      _context: Object,
       _extensions: Array
     }
   }
@@ -22,6 +25,7 @@ class ExportContextUI extends connect(store)(LitElement) {
           max-height: 30vh;
           background-color: #cf4545;
         }
+
         ul {
           margin: 0;
           padding: 0;
@@ -30,19 +34,24 @@ class ExportContextUI extends connect(store)(LitElement) {
           height: 100%;
           overflow-y: auto;
         }
+
         li {
           display: flex;
         }
+
         li > mwc-icon {
           padding: 10px;
         }
+
         li > span {
           margin: auto 0 auto 0;
           flex: 1;
         }
+
         li > input {
           margin: auto 10px;
         }
+
         mwc-button {
           margin-right: auto;
           padding: 0 10px;
@@ -57,7 +66,9 @@ class ExportContextUI extends connect(store)(LitElement) {
     for (let extension in this._extensions) {
       extensions.push(extension)
     }
-    this.extension = this.extension || extensions.length > 0 ? extensions[0] : null
+
+    this.extension = extensions.length > 0 ? extensions[0] : null
+
     return html`
       <ul>
         ${extensions.map(
@@ -82,32 +93,26 @@ class ExportContextUI extends connect(store)(LitElement) {
       </ul>
 
       <mwc-button
-        @click="${() => {
-          if (!this.extension) {
-            document.dispatchEvent(
-              new CustomEvent('notify', {
-                detail: {
-                  type: 'info',
-                  message: 'Extension is not selected.'
-                }
-              })
-            )
-            return
-          }
-          document.dispatchEvent(
-            new CustomEvent('export', {
-              detail: {
-                callback: params => this._dispatchAction(params)
-              }
-            })
-          )
-        }}"
+        @click=${this._export.bind(this)}"
         >Export to...</mwc-button
       >
     `
   }
 
-  _dispatchAction(params) {
+  _export() {
+    if (!this.extension) {
+      document.dispatchEvent(
+        new CustomEvent('notify', {
+          detail: {
+            type: 'warn',
+            message: 'Extension is not selected.'
+          }
+        })
+      )
+
+      return
+    }
+
     store.dispatch({
       type: EXPORT,
       export: {
@@ -123,7 +128,8 @@ class ExportContextUI extends connect(store)(LitElement) {
   }
 
   stateChanged(state) {
-    this._extensions = state && state.exporting && state.exporting.extensions
+    this._extensions = (state.exporting && state.exporting.extensions) || []
+    this._context = state.route.context
   }
 }
 

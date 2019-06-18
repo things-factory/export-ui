@@ -1,7 +1,9 @@
-import '@material/mwc-button/mwc-button'
-import { APPEND_CONTEXT_TOOL, TOOL_POSITION, TOGGLE_OVERLAY } from '@things-factory/layout-base'
-import { store } from '@things-factory/shell'
 import { html } from 'lit-html'
+
+import '@material/mwc-button/mwc-button'
+
+import { store } from '@things-factory/shell'
+import { APPEND_CONTEXT_TOOL, TOOL_POSITION, TOGGLE_OVERLAY } from '@things-factory/layout-base'
 
 function toggleOverlayTemplate() {
   store.dispatch({
