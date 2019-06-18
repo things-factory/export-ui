@@ -1,6 +1,6 @@
 {
   "name": "@things-factory/export-ui",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "dist-server/index.js",
   "browser": "client/index.js",
   "things-factory": true,
@@ -29,9 +29,6 @@
     "@things-factory/shell": "*"
   },
   "devDependencies": {
-    "@things-factory/auth-ui-jwt": "*",
-    "@things-factory/biz-test": "*",
-    "@things-factory/menu-ui": "*",
-    "@things-factory/resource-ui": "*"
+    "@things-factory/tester": "*"
   }
 }

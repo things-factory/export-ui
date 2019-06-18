@@ -115,7 +115,7 @@ class ExportContextUI extends connect(store)(LitElement) {
 
     store.dispatch({
       type: EXPORT,
-      export: {
+      exportable: {
         extension: this.extension,
         ...this._context.exportable
       }
