@@ -62,9 +62,18 @@ class ExportContextUI extends connect(store)(LitElement) {
 
   render() {
     const extensions = []
+    const exportable = this._context.exportable || {}
+    const allowed =
+      exportable.allowed instanceof Array
+        ? exportable.allowed
+        : typeof exportable.allowed == 'string'
+        ? [exportable.allowed]
+        : null
 
     for (let extension in this._extensions) {
-      extensions.push(extension)
+      if (!allowed || allowed.indexOf(extension) != -1) {
+        extensions.push(extension)
+      }
     }
 
     this.extension = extensions.length > 0 ? extensions[0] : null
