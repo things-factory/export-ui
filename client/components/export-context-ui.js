@@ -63,15 +63,15 @@ class ExportContextUI extends connect(store)(LitElement) {
   render() {
     const extensions = []
     const exportable = this._context.exportable || {}
-    const allowed =
-      exportable.allowed instanceof Array
-        ? exportable.allowed
-        : typeof exportable.allowed == 'string'
-        ? [exportable.allowed]
+    const accept =
+      exportable.accept instanceof Array
+        ? exportable.accept
+        : typeof exportable.accept == 'string'
+        ? [exportable.accept]
         : null
 
     for (let extension in this._extensions) {
-      if (!allowed || allowed.indexOf(extension) != -1) {
+      if (!accept || accept.indexOf(extension) != -1) {
         extensions.push(extension)
       }
     }
@@ -101,10 +101,7 @@ class ExportContextUI extends connect(store)(LitElement) {
         )}
       </ul>
 
-      <mwc-button
-        @click=${this._export.bind(this)}"
-        >Export to...</mwc-button
-      >
+      <mwc-button @click=${this._export.bind(this)}>Export to...</mwc-button>
     `
   }
 
