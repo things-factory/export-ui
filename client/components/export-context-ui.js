@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit-element'
 import { connect } from 'pwa-helpers'
 
-import '@material/mwc-icon/mwc-icon'
+import '@material/mwc-icon'
 
 import { EXPORT } from '@things-factory/export-base'
 import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
