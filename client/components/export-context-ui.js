@@ -110,7 +110,7 @@ class ExportContextUI extends connect(store)(LitElement) {
       document.dispatchEvent(
         new CustomEvent('notify', {
           detail: {
-            type: 'warn',
+            level: 'warn',
             message: 'Extension is not selected.'
           }
         })
