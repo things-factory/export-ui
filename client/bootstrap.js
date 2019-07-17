@@ -3,11 +3,12 @@ import { html } from 'lit-html'
 import '@material/mwc-button'
 
 import { store } from '@things-factory/shell'
-import { APPEND_CONTEXT_TOOL, TOOL_POSITION, TOGGLE_OVERLAY } from '@things-factory/layout-base'
+import { TOOL_POSITION } from '@things-factory/layout-base'
+import { APPEND_CONTEXT_TOOL, SHOW_CONTEXT_OVERLAY } from '@things-factory/context-base'
 
 function toggleOverlayTemplate() {
   store.dispatch({
-    type: TOGGLE_OVERLAY,
+    type: SHOW_CONTEXT_OVERLAY,
     template: html`
       <export-context-ui></export-context-ui>
     `

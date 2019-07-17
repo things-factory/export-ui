@@ -3,9 +3,9 @@ import { connect } from 'pwa-helpers'
 
 import '@material/mwc-icon'
 
-import { EXPORT } from '@things-factory/export-base'
-import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
 import { store } from '@things-factory/shell'
+import { EXPORT } from '@things-factory/export-base'
+import { HIDE_CONTEXT_OVERLAY } from '@things-factory/context-base'
 
 class ExportContextUI extends connect(store)(LitElement) {
   static get properties() {
@@ -128,8 +128,7 @@ class ExportContextUI extends connect(store)(LitElement) {
     })
 
     store.dispatch({
-      type: TOGGLE_OVERLAY,
-      overlay: { show: false }
+      type: HIDE_CONTEXT_OVERLAY
     })
   }
 
