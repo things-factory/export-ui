@@ -5,7 +5,7 @@ import '@material/mwc-icon'
 
 import { store } from '@things-factory/shell'
 import { EXPORT } from '@things-factory/export-base'
-import { HIDE_CONTEXT_OVERLAY } from '@things-factory/context-base'
+import { closeOverlay } from '@things-factory/layout-base'
 
 class ExportContextUI extends connect(store)(LitElement) {
   static get properties() {
@@ -127,9 +127,7 @@ class ExportContextUI extends connect(store)(LitElement) {
       }
     })
 
-    store.dispatch({
-      type: HIDE_CONTEXT_OVERLAY
-    })
+    closeOverlay('context-toolbar-overlay')
   }
 
   stateChanged(state) {
