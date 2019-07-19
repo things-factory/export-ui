@@ -5,7 +5,6 @@ import '@material/mwc-icon'
 
 import { store, ScrollbarStyles } from '@things-factory/shell'
 import { EXPORT } from '@things-factory/export-base'
-import { closeOverlay } from '@things-factory/layout-base'
 
 import { ContextToolbarOverlayStyle } from '@things-factory/context-ui'
 
@@ -62,7 +61,7 @@ class ExportOverlayTemplate extends connect(store)(LitElement) {
       }
     })
 
-    closeOverlay('context-toolbar-overlay')
+    this.dispatchEvent(new CustomEvent('close-overlay', { bubbles: true, composed: true }))
   }
 
   stateChanged(state) {
