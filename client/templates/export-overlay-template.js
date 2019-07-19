@@ -3,11 +3,13 @@ import { connect } from 'pwa-helpers'
 
 import '@material/mwc-icon'
 
-import { store } from '@things-factory/shell'
+import { store, ScrollbarStyles } from '@things-factory/shell'
 import { EXPORT } from '@things-factory/export-base'
 import { closeOverlay } from '@things-factory/layout-base'
 
-class ExportContextUI extends connect(store)(LitElement) {
+import { ContextToolbarOverlayStyle } from '@things-factory/context-ui'
+
+class ExportOverlayTemplate extends connect(store)(LitElement) {
   static get properties() {
     return {
       _context: Object,
@@ -16,48 +18,7 @@ class ExportContextUI extends connect(store)(LitElement) {
   }
 
   static get styles() {
-    return [
-      css`
-        :host {
-          display: flex;
-          flex-direction: column;
-          margin: auto 0 0 0;
-          max-height: 30vh;
-          background-color: #cf4545;
-        }
-
-        ul {
-          margin: 0;
-          padding: 0;
-          color: #fff;
-          list-style: none;
-          height: 100%;
-          overflow-y: auto;
-        }
-
-        li {
-          display: flex;
-        }
-
-        li > mwc-icon {
-          padding: 10px;
-        }
-
-        li > span {
-          margin: auto 0 auto 0;
-          flex: 1;
-        }
-
-        li > input {
-          margin: auto 10px;
-        }
-
-        mwc-button {
-          margin-right: auto;
-          padding: 0 10px;
-        }
-      `
-    ]
+    return [ScrollbarStyles, ContextToolbarOverlayStyle]
   }
 
   render() {
@@ -136,4 +97,4 @@ class ExportContextUI extends connect(store)(LitElement) {
   }
 }
 
-window.customElements.define('export-context-ui', ExportContextUI)
+window.customElements.define('export-overlay-template', ExportOverlayTemplate)

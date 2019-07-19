@@ -6,16 +6,16 @@ import { store } from '@things-factory/shell'
 import { openOverlay, TOOL_POSITION } from '@things-factory/layout-base'
 import { APPEND_CONTEXT_TOOL } from '@things-factory/context-base'
 
-function openContextToolbarOverlay() {
-  openOverlay('context-toolbar-overlay', {
-    template: html`
-      <export-context-ui></export-context-ui>
-    `
-  })
-}
-
 export default function bootstrap() {
-  import('./components/export-context-ui')
+  import('./templates/export-overlay-template')
+
+  function openContextToolbarOverlay() {
+    openOverlay('context-toolbar-overlay', {
+      template: html`
+        <export-overlay-template></export-overlay-template>
+      `
+    })
+  }
 
   store.dispatch({
     type: APPEND_CONTEXT_TOOL,
