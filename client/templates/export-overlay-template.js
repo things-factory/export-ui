@@ -37,53 +37,27 @@ class ExportOverlayTemplate extends connect(store)(LitElement) {
       }
     }
 
-    this.extension = extensions.length > 0 ? extensions[0] : null
-
     return html`
       <ul>
         ${extensions.map(
           (extension, idx) => html`
             <label for="${idx}">
-              <li>
+              <li @click=${e => this._export(extension)}>
                 <mwc-icon>description</mwc-icon>
                 <span>${extension}</span>
-                <input
-                  id="${idx}"
-                  type="radio"
-                  name="extensions"
-                  @change="${() => {
-                    this.extension = extension
-                  }}"
-                  ?checked="${idx === 0}"
-                />
               </li>
             </label>
           `
         )}
       </ul>
-
-      <mwc-button @click=${this._export.bind(this)}>Export to...</mwc-button>
     `
   }
 
-  _export() {
-    if (!this.extension) {
-      document.dispatchEvent(
-        new CustomEvent('notify', {
-          detail: {
-            level: 'warn',
-            message: 'Extension is not selected.'
-          }
-        })
-      )
-
-      return
-    }
-
+  _export(extension) {
     store.dispatch({
       type: EXPORT,
       exportable: {
-        extension: this.extension,
+        extension,
         ...this._context.exportable
       }
     })
