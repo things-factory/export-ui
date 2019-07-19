@@ -6,7 +6,7 @@ import { store } from '@things-factory/shell'
 import { openOverlay, TOOL_POSITION } from '@things-factory/layout-base'
 import { APPEND_CONTEXT_TOOL } from '@things-factory/context-base'
 
-function openOverlayTemplate() {
+function openContextToolbarOverlay() {
   openOverlay('context-toolbar-overlay', {
     template: html`
       <export-context-ui></export-context-ui>
@@ -22,7 +22,7 @@ export default function bootstrap() {
     tool: {
       position: TOOL_POSITION.REAR_END,
       template: html`
-        <mwc-button style="margin: auto 0;" @click="${openOverlayTemplate}">export</mwc-button>
+        <mwc-button style="margin: auto 0;" @click="${openContextToolbarOverlay}">export</mwc-button>
       `,
       context: 'exportable'
     }
