@@ -1,6 +1,6 @@
 import { html } from 'lit-html'
 
-import '@material/mwc-button'
+import '@material/mwc-icon'
 
 import { store } from '@things-factory/shell'
 import { openOverlay, TOOL_POSITION } from '@things-factory/layout-base'
@@ -20,9 +20,9 @@ export default function bootstrap() {
   store.dispatch({
     type: APPEND_CONTEXT_TOOL,
     tool: {
-      position: TOOL_POSITION.REAR_END,
+      position: TOOL_POSITION.FRONT,
       template: html`
-        <mwc-button style="margin: auto 0;" @click="${openContextToolbarOverlay}">export</mwc-button>
+        <mwc-icon @click="${openContextToolbarOverlay}">save_alt</mwc-icon>
       `,
       context: 'exportable'
     }
